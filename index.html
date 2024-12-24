@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Incoming Transmission</title>
+    <title>Self-Contained Transmission</title>
     <style>
         body {
             margin: 0;
@@ -29,7 +29,7 @@
             margin: 0;
         }
 
-        #play-button {
+        #play-button, #next-page {
             display: none;
             margin-top: 20px;
             padding: 10px 20px;
@@ -43,26 +43,43 @@
             box-shadow: 0 0 10px #0f0, 0 0 20px #0f0;
         }
 
-        #next-page {
+        #play-button:hover, #next-page:hover {
+            background-color: #0c0;
+        }
+
+        .instructions {
             display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: bisque;
+            color: black;
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .instructions p {
+            font-size: 1.2rem;
+            font-family: 'Arial', sans-serif;
+            margin: 10px 0;
+        }
+
+        .download-btn {
             margin-top: 20px;
             padding: 10px 20px;
-            background-color: #0f0;
+            background-color: #f4a261;
             border: none;
-            color: #000;
+            color: white;
             font-size: 1rem;
-            font-family: 'Courier New', Courier, monospace;
+            font-family: 'Arial', sans-serif;
             cursor: pointer;
             border-radius: 5px;
-            box-shadow: 0 0 10px #0f0, 0 0 20px #0f0;
+            box-shadow: 0 0 10px #f4a261, 0 0 20px #e76f51;
         }
 
-        #play-button:hover {
-            background-color: #0c0;
-        }
-
-        #next-page:hover {
-            background-color: #0c0;
+        .download-btn:hover {
+            background-color: #e76f51;
         }
 
         @keyframes fade {
@@ -76,33 +93,67 @@
     </style>
 </head>
 <body>
-    <div class="transmission">
+    <div id="transmission" class="transmission">
         <h1>INCOMING TRANSMISSION...</h1>
         <button id="play-button">Play Transmission</button>
         <button id="next-page">NEXT PAGE</button>
     </div>
+
+    <div id="instructions" class="instructions">
+        <h1>Hello Brother</h1>
+        <p>Twas the night before Christmas, all through the house, not a NORMAL person was stirring, not even a mouse. </p>
+        <p>Posted in the basement, your little brother felt like trolling, the perfect victim he had to find. Unfortunately, you have been chosen for this year's troll.</p>
+        <p>I have split the steam cards into 3 - 20$ cards. You are going to have to decipher each code for my personal entertainment!</p>
+        <p>GIFT CARD 1: 漆 園 書 廳 寶 - 寶 珠 魚 鬼 魚 - 魚 雷 獾 獾 鹭</p>
+        <p>GIFT CARD 2: 麥 佛 菜 假 佛 - 佛 齒 豹 寶 菜 - 麥 繪 珠 書 珠</p>
+        <p>Gift card 3 pending arrival.</p>
+        <button class="download-btn" onclick="downloadPDF()">Download PDF</button>
+        <button id="back-button">Go Back</button>
+    </div>
+
     <audio id="audio-file" src="speech_20241224203139158.mp3"></audio>
 
     <script>
+        // Show play button after 5 seconds
         setTimeout(() => {
-            const button = document.getElementById('play-button');
-            button.style.display = 'block';
+            const playButton = document.getElementById('play-button');
+            playButton.style.display = 'block';
         }, 5000);
 
+        // Show next page button after 10 seconds
         setTimeout(() => {
-            const button = document.getElementById('next-page');
-            button.style.display = 'block';
+            const nextPageButton = document.getElementById('next-page');
+            nextPageButton.style.display = 'block';
         }, 10000);
 
+        // Play the audio
         document.getElementById('play-button').addEventListener('click', () => {
             const audio = document.getElementById('audio-file');
             audio.play();
-
         });
 
+        // Show the instructions page
         document.getElementById('next-page').addEventListener('click', () => {
-            window.location.href = 'instructions.html'; 
+            document.getElementById('transmission').style.display = 'none';
+            document.getElementById('instructions').style.display = 'flex';
         });
+
+        // Go back to the transmission page
+        document.getElementById('back-button').addEventListener('click', () => {
+            document.getElementById('instructions').style.display = 'none';
+            document.getElementById('transmission').style.display = 'flex';
+            document.getElementById('play-button').style.display = 'block';
+            document.getElementById('next-page').style.display = 'block';
+        });
+
+        // Function to download the PDF
+        function downloadPDF() {
+            const link = document.createElement('a');
+            link.href = 'DECRYPTION.pdf'; // Replace with the actual path to your PDF
+            link.download = 'DECRYPTION.pdf'; // File name for the downloaded PDF
+            link.click();
+        }
     </script>
 </body>
 </html>
+
