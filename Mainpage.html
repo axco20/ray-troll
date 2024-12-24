@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Incoming Transmission</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(to bottom, #000, #111);
+            color: #0f0;
+            font-family: 'Courier New', Courier, monospace;
+            overflow: hidden;
+            flex-direction: column;
+        }
+
+        .transmission {
+            text-align: center;
+            animation: fade 1.5s infinite;
+        }
+
+        .transmission h1 {
+            font-size: 3rem;
+            text-shadow: 0 0 10px #0f0, 0 0 20px #0f0, 0 0 30px #0f0;
+            margin: 0;
+        }
+
+        #play-button {
+            display: none;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #0f0;
+            border: none;
+            color: #000;
+            font-size: 1rem;
+            font-family: 'Courier New', Courier, monospace;
+            cursor: pointer;
+            border-radius: 5px;
+            box-shadow: 0 0 10px #0f0, 0 0 20px #0f0;
+        }
+
+        #next-page {
+            display: none;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #0f0;
+            border: none;
+            color: #000;
+            font-size: 1rem;
+            font-family: 'Courier New', Courier, monospace;
+            cursor: pointer;
+            border-radius: 5px;
+            box-shadow: 0 0 10px #0f0, 0 0 20px #0f0;
+        }
+
+        #play-button:hover {
+            background-color: #0c0;
+        }
+
+        #next-page:hover {
+            background-color: #0c0;
+        }
+
+        @keyframes fade {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="transmission">
+        <h1>INCOMING TRANSMISSION...</h1>
+        <button id="play-button">Play Transmission</button>
+        <button id="next-page">NEXT PAGE</button>
+    </div>
+    <audio id="audio-file" src="speech_20241224203139158.mp3"></audio>
+
+    <script>
+        setTimeout(() => {
+            const button = document.getElementById('play-button');
+            button.style.display = 'block';
+        }, 5000);
+
+        setTimeout(() => {
+            const button = document.getElementById('next-page');
+            button.style.display = 'block';
+        }, 10000);
+
+        document.getElementById('play-button').addEventListener('click', () => {
+            const audio = document.getElementById('audio-file');
+            audio.play();
+
+        });
+
+        document.getElementById('next-page').addEventListener('click', () => {
+            window.location.href = 'instructions.html'; 
+        });
+    </script>
+</body>
+</html>
